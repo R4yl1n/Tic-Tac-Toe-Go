@@ -1,9 +1,7 @@
 package player
 
-import(
+import (
 	"fmt"
-
-	github.com/R4yl1n/Tic-Tac-Toe-Go
 )
 
 type Player struct {
@@ -26,8 +24,7 @@ func Play(x Player) {
 
 		}
 	}
-	
-	
+
 }
 
 func CreatePlayer(returnment Player, symbol string) Player {
