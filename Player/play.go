@@ -9,7 +9,7 @@ type Player struct {
 	symbole string
 }
 
-func Play(x Player) {
+func Play(x Player, Fields []string) {
 	var validInput bool
 	for validInput = false; validInput != true; {
 		fmt.Printf("Player %v where do u wanna place ur symbole %v \n", x.Player, x.symbole)
@@ -25,9 +25,4 @@ func Play(x Player) {
 		}
 	}
 
-}
-
-func CreatePlayer(returnment Player, symbol string) Player {
-	returnment.symbole = string(symbol)
-	return returnment
 }
