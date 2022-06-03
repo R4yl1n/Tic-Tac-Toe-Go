@@ -9,6 +9,18 @@ type Player struct {
 	Symbole string
 }
 
+func CreateSymbole(p string) Player {
+	if p == "X" {
+		var player Player
+		player.Symbole = "X"
+		return player
+	} else {
+		var player Player
+		player.Symbole = "O"
+		return player
+	}
+}
+
 func Play(x Player, Fields *[9]string) {
 	var validInput bool
 	for validInput = false; validInput != true; {
