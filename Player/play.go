@@ -12,7 +12,7 @@ type Player struct {
 func Play(x Player, Fields *[]string) {
 	var validInput bool
 	for validInput = false; validInput != true; {
-		fmt.Printf("Player %v where do u wanna place ur symbole %v \n", x.Player, x.symbole)
+		fmt.Printf("Player %v where do u wanna place ur symbole %v \n", x.Player, x.Symbole)
 		var field int
 		fmt.Scan(&field)
 		if field > 9 || (*Fields)[field-1] == "O" || (*Fields)[field-1] == "X" {
@@ -20,7 +20,7 @@ func Play(x Player, Fields *[]string) {
 
 		} else {
 			validInput = true
-			(*Fields)[field-1] = x.symbole
+			(*Fields)[field-1] = x.Symbole
 
 		}
 	}
