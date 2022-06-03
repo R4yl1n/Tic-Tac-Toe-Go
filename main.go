@@ -2,53 +2,55 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/R4yl1n/Tic-Tac-Toe-Go/player"
 )
 
 var winnerknown bool = false
-var fields = [9]string{"[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]"}
+var Fields = [9]string{"[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]"}
 
 func printBoard() {
-	fmt.Printf("\n %v | %v | %v \n", fields[0], fields[1], fields[2])
+	fmt.Printf("\n %v | %v | %v \n", Fields[0], Fields[1], Fields[2])
 	fmt.Printf("________________\n")
-	fmt.Printf(" %v | %v | %v \n", fields[3], fields[4], fields[5])
+	fmt.Printf(" %v | %v | %v \n", Fields[3], Fields[4], Fields[5])
 	fmt.Printf("________________\n")
-	fmt.Printf(" %v | %v | %v \n", fields[6], fields[7], fields[8])
+	fmt.Printf(" %v | %v | %v \n", Fields[6], Fields[7], Fields[8])
 	fmt.Printf("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n")
 
 }
 
 func checkwinner() string {
-	if fields[0] == fields[1] && fields[0] == fields[2] {
+	if Fields[0] == Fields[1] && Fields[0] == Fields[2] {
 		winnerknown = true
-		return fields[0]
+		return Fields[0]
 
-	} else if fields[3] == fields[4] && fields[3] == fields[5] {
+	} else if Fields[3] == Fields[4] && Fields[3] == Fields[5] {
 		winnerknown = true
-		return fields[3]
+		return Fields[3]
 
-	} else if fields[6] == fields[7] && fields[6] == fields[8] {
+	} else if Fields[6] == Fields[7] && Fields[6] == Fields[8] {
 		winnerknown = true
-		return fields[6]
+		return Fields[6]
 
-	} else if fields[0] == fields[4] && fields[0] == fields[8] {
+	} else if Fields[0] == Fields[4] && Fields[0] == Fields[8] {
 		winnerknown = true
-		return fields[0]
+		return Fields[0]
 
-	} else if fields[2] == fields[4] && fields[2] == fields[6] {
+	} else if Fields[2] == Fields[4] && Fields[2] == Fields[6] {
 		winnerknown = true
-		return fields[2]
+		return Fields[2]
 
-	} else if fields[0] == fields[3] && fields[0] == fields[6] {
+	} else if Fields[0] == Fields[3] && Fields[0] == Fields[6] {
 		winnerknown = true
-		return fields[0]
+		return Fields[0]
 
-	} else if fields[1] == fields[4] && fields[1] == fields[7] {
+	} else if Fields[1] == Fields[4] && Fields[1] == Fields[7] {
 		winnerknown = true
-		return fields[1]
+		return Fields[1]
 
-	} else if fields[2] == fields[5] && fields[2] == fields[8] {
+	} else if Fields[2] == Fields[5] && Fields[2] == Fields[8] {
 		winnerknown = true
-		return fields[2]
+		return Fields[2]
 
 	} else {
 		winnerknown = false
@@ -57,49 +59,25 @@ func checkwinner() string {
 
 }
 
-func Play(x player) {
-	var validInput bool
-	for validInput = false; validInput != true; {
-		fmt.Printf("Player %v where do u wanna place ur symbole %v \n", x.Player, x.symbole)
-		var field int
-		fmt.Scan(&field)
-		if field > 9 || fields[field-1] == "O" || fields[field-1] == "X" {
-			validInput = false
-
-		} else {
-			validInput = true
-			fields[field-1] = x.symbole
-
-		}
-	}
-}
-
-type player struct {
-	Player  string
-	symbole string
-}
-
 func clearBoard() {
 	countdownClearBoard := 0
 	for i := 0; i < 9; i++ {
-		if fields[i] == "O" || fields[i] == "X" {
+		if Fields[i] == "O" || Fields[i] == "X" {
 			countdownClearBoard += 1
 		}
 
 		if countdownClearBoard == 9 {
-			fields = [9]string{"[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]"}
-			fmt.Print("Restarting Board \n XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+			Fields = [9]string{"[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]"}
+			fmt.Println("Restarting Board \n XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+			printBoard()
 		}
 	}
 }
 
 func main() {
 
-	var personO player
-	personO.symbole = "O"
-	var personX player
-	personX.symbole = "X"
-
+	personO := player.CreateSymbole("O")
+	personX := player.CreateSymbole("X")
 	fmt.Printf("Player one please insert your name, you are the symbol O \n")
 	fmt.Scan(&personO.Player)
 
@@ -119,12 +97,12 @@ func main() {
 			switch i {
 
 			case 0:
-				Play(personO)
+				player.Play(personO, (&Fields))
 				printBoard()
 				winnerknownstring = checkwinner()
 				clearBoard()
 			case 1:
-				Play(personX)
+				player.Play(personX, (&Fields))
 				printBoard()
 				winnerknownstring = checkwinner()
 				clearBoard()
@@ -133,5 +111,3 @@ func main() {
 	}
 	fmt.Printf("Congratulation %v you won this game", winnerknownstring)
 }
-
-// what if nobody winns
