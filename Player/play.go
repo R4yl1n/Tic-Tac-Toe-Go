@@ -6,7 +6,7 @@ import (
 
 type Player struct {
 	Player  string
-	symbole string
+	Symbole string
 }
 
 func Play(x Player, Fields *[]string) {
